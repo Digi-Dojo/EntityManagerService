@@ -4,9 +4,9 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
   <persistence-unit name="default">
-    <class>com.startupsdigidojo.usersandteams.user.domain.User</class>
-    <class>com.startupsdigidojo.usersandteams.teamMember.domain.TeamMember</class>
-    <class>com.startupsdigidojo.usersandteams.startup.domain.Startup</class>
+    <class>it.unibz.digidojo.entitymanagerservice.user.domain.User</class>
+    <class>it.unibz.digidojo.entitymanagerservice.teammember.domain.TeamMember</class>
+    <class>it.unibz.digidojo.entitymanagerservice.startup.domain.Startup</class>
     <properties>
       <property
             name="hibernate.globally_quoted_identifiers"
