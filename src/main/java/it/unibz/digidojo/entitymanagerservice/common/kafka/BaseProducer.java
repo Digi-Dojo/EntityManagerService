@@ -3,6 +3,7 @@ package it.unibz.digidojo.entitymanagerservice.common.kafka;
 import java.util.Collections;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.header.internals.RecordHeader;
@@ -12,6 +13,7 @@ import it.unibz.digidojo.entitymanagerservice.util.CRUD;
 import it.unibz.digidojo.sharedmodel.event.BaseEvent;
 import it.unibz.digidojo.sharedmodel.marshaller.Marshaller;
 
+@Slf4j
 @RequiredArgsConstructor
 public abstract class BaseProducer {
     private final KafkaTemplate<String, String> sender;
@@ -22,8 +24,8 @@ public abstract class BaseProducer {
             final String topic = KafkaConfig.topics.get(operation);
 
             if (topic.isEmpty()) {
-                System.out.printf("CRUD operation does not have a topic mapped. operation=%s\n", operation);
-                System.out.printf("Skipping event. event={%s}\n", event);
+                log.warn("CRUD operation does not have a topic mapped. operation={}", operation);
+                log.info("Skipping event. event={}", event);
                 return;
             }
 
@@ -37,7 +39,7 @@ public abstract class BaseProducer {
             );
 
             sender.send(kafkaRecord);
-            System.out.printf("Event produced on Kafka. topic={%s} event={%s}\n", topic, event);
+            log.info("Event produced on Kafka. topic={} event={}", topic, event);
         } catch (ClassCastException e) {
             throw new RuntimeException(String.format("Could not parse the event as a json. %s", e.getMessage()), e);
         }

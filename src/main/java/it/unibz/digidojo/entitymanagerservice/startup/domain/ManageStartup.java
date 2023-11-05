@@ -28,7 +28,6 @@ public class ManageStartup {
      * @throws IllegalArgumentException if a startup with the given name already exists
      */
     public Startup createStartup(String name, String description) {
-
         Optional<Startup> maybeStartup = startupRepository.findByName(name);
 
         if (maybeStartup.isPresent()) {
