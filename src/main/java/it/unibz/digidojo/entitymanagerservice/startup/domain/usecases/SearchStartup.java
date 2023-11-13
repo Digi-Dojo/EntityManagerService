@@ -1,23 +1,20 @@
-package it.unibz.digidojo.entitymanagerservice.startup.domain;
+package it.unibz.digidojo.entitymanagerservice.startup.domain.usecases;
 
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * Service class that serves to handle the get requests on startups
- */
+import it.unibz.digidojo.entitymanagerservice.startup.domain.Startup;
+import it.unibz.digidojo.entitymanagerservice.startup.domain.StartupRepository;
+
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class SearchStartup {
-
     private final StartupRepository startupRepository;
-
-    @Autowired
-    public SearchStartup(StartupRepository startupRepository) {
-        this.startupRepository = startupRepository;
-    }
 
     /**
      * @param id id of the startup we want to find
@@ -30,7 +27,6 @@ public class SearchStartup {
         if (maybeStartup.isEmpty()) {
             throw new IllegalArgumentException("Startup with id " + id + " is not present in the database");
         }
-
         return maybeStartup.get();
     }
 
@@ -57,8 +53,6 @@ public class SearchStartup {
         if (maybeStartup.isEmpty()) {
             throw new IllegalArgumentException("Startup with name " + name + " does not exist");
         }
-
         return maybeStartup.get();
     }
-
 }

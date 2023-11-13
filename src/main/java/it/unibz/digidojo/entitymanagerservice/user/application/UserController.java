@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.unibz.digidojo.entitymanagerservice.user.domain.LoginService;
-import it.unibz.digidojo.entitymanagerservice.user.domain.ManageUser;
-import it.unibz.digidojo.entitymanagerservice.user.domain.SearchUser;
+import it.unibz.digidojo.entitymanagerservice.user.domain.usecases.LoginUser;
+import it.unibz.digidojo.entitymanagerservice.user.domain.usecases.ManageUser;
+import it.unibz.digidojo.entitymanagerservice.user.domain.usecases.SearchUser;
 import it.unibz.digidojo.entitymanagerservice.user.domain.User;
 import it.unibz.digidojo.sharedmodel.request.UpdateUserRequest;
 import it.unibz.digidojo.sharedmodel.request.UserRequest;
@@ -23,13 +23,13 @@ import it.unibz.digidojo.sharedmodel.request.UserRequest;
 public class UserController {
     private final ManageUser manageUser;
     private final SearchUser searchUser;
-    private final LoginService loginService;
+    private final LoginUser loginUser;
 
     @Autowired
-    public UserController(ManageUser manageUser, SearchUser searchUser, LoginService loginService) {
+    public UserController(ManageUser manageUser, SearchUser searchUser, LoginUser loginUser) {
         this.manageUser = manageUser;
         this.searchUser = searchUser;
-        this.loginService = loginService;
+        this.loginUser = loginUser;
     }
 
     @PostMapping
@@ -37,14 +37,14 @@ public class UserController {
         return manageUser.createUser(
                 request.name(),
                 request.emailAddress(),
-                loginService.hashPassword(request.password(), request.emailAddress())
+                loginUser.hashPassword(request.password(), request.emailAddress())
         );
     }
 
     @PostMapping("/login")
     public User loginUser(@RequestBody UserRequest request) {
         User user = searchUser.findByMailAddress(request.emailAddress());
-        return loginService.verifyPassword(user, request.password());
+        return loginUser.verifyPassword(user, request.password());
     }
 
     @GetMapping("/{id}")
@@ -60,14 +60,14 @@ public class UserController {
     @PatchMapping("/{id}")
     public User updateUser(@PathVariable("id") Long id, @Validated @RequestBody UpdateUserRequest request) {
         User user = searchUser.findById(id), updatedUser = null;
-        user = loginService.verifyPassword(user, request.currentPassword());
+        user = loginUser.verifyPassword(user, request.currentPassword());
 
         if (request.emailAddress() != null) {
             updatedUser = manageUser.updateUserMail(user.getEmailAddress(), request.emailAddress());
         }
 
         if (request.password() != null) {
-            updatedUser = manageUser.updatePassword(user, loginService.hashPassword(
+            updatedUser = manageUser.updatePassword(user, loginUser.hashPassword(
                             request.password(),
                             updatedUser != null ? updatedUser.getEmailAddress() : user.getEmailAddress()
                     )

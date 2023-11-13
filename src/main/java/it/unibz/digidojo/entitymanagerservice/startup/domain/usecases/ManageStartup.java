@@ -1,23 +1,21 @@
-package it.unibz.digidojo.entitymanagerservice.startup.domain;
+package it.unibz.digidojo.entitymanagerservice.startup.domain.usecases;
 
 import java.util.Optional;
+
+import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * Service class that serves to manage actions performed on startups
- */
+import it.unibz.digidojo.entitymanagerservice.startup.domain.Startup;
+import it.unibz.digidojo.entitymanagerservice.startup.domain.StartupBroadcaster;
+import it.unibz.digidojo.entitymanagerservice.startup.domain.StartupRepository;
+
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ManageStartup {
     private final StartupRepository startupRepository;
     private final StartupBroadcaster startupBroadcaster;
-
-    @Autowired
-    public ManageStartup(StartupRepository startupRepository, StartupBroadcaster startupBroadcaster) {
-        this.startupRepository = startupRepository;
-        this.startupBroadcaster = startupBroadcaster;
-    }
 
     /**
      * Given a name and a description, this method creates a startup with said characteristics
@@ -37,7 +35,6 @@ public class ManageStartup {
         Startup startup = startupRepository.save(new Startup(name, description));
 
         startupBroadcaster.emitStartupCreated(startup);
-
         return startup;
     }
 
@@ -62,7 +59,7 @@ public class ManageStartup {
         }
         Startup startup = maybeStartup.get();
         startup.setName(newName);
-        //startupBroadcaster.emitStartupNameUpdate(startup);
+        startupBroadcaster.emitStartupUpdated(startup);
         return startupRepository.save(startup);
     }
 
@@ -83,7 +80,7 @@ public class ManageStartup {
 
         Startup startup = maybeStartup.get();
         startup.setDescription(description);
-        //startupBroadcaster.emitStartupUpdated(startup);
+        startupBroadcaster.emitStartupUpdated(startup);
         return startupRepository.save(startup);
     }
 
@@ -101,7 +98,7 @@ public class ManageStartup {
         }
 
         Startup startup = maybeStartup.get();
-        //startupBroadcaster.emitStartupDeleted(startup);
+        startupBroadcaster.emitStartupDeleted(startup);
         startupRepository.delete(startup);
     }
 }

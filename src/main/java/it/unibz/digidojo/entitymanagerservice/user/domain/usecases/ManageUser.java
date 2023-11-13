@@ -1,21 +1,22 @@
-package it.unibz.digidojo.entitymanagerservice.user.domain;
+package it.unibz.digidojo.entitymanagerservice.user.domain.usecases;
 
 import java.util.Optional;
+
+import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.unibz.digidojo.entitymanagerservice.user.domain.User;
+import it.unibz.digidojo.entitymanagerservice.user.domain.UserBroadcaster;
+import it.unibz.digidojo.entitymanagerservice.user.domain.UserRepository;
+
 //TODO: Implement name update
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ManageUser {
     private final UserRepository userRepository;
     private final UserBroadcaster userBroadcaster;
-
-    @Autowired
-    public ManageUser(UserRepository userRepository, UserBroadcaster userBroadcaster) {
-        this.userRepository = userRepository;
-        this.userBroadcaster = userBroadcaster;
-    }
 
     /**
      * @param name        name of the user

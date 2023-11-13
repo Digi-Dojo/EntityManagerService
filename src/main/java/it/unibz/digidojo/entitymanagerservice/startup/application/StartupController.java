@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.unibz.digidojo.entitymanagerservice.startup.domain.ManageStartup;
-import it.unibz.digidojo.entitymanagerservice.startup.domain.SearchStartup;
+import it.unibz.digidojo.entitymanagerservice.startup.domain.usecases.ManageStartup;
+import it.unibz.digidojo.entitymanagerservice.startup.domain.usecases.SearchStartup;
 import it.unibz.digidojo.entitymanagerservice.startup.domain.Startup;
 import it.unibz.digidojo.sharedmodel.request.StartupRequest;
 

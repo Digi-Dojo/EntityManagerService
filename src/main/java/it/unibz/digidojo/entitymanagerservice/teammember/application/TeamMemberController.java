@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.unibz.digidojo.entitymanagerservice.teammember.domain.ManageTeamMember;
+import it.unibz.digidojo.entitymanagerservice.teammember.domain.usecases.ManageTeamMember;
 import it.unibz.digidojo.entitymanagerservice.teammember.domain.TeamMember;
 import it.unibz.digidojo.sharedmodel.request.TeamMemberRequest;
 

@@ -1,18 +1,19 @@
-package it.unibz.digidojo.entitymanagerservice.user.domain;
+package it.unibz.digidojo.entitymanagerservice.user.domain.usecases;
 
 import java.util.Optional;
+
+import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.unibz.digidojo.entitymanagerservice.user.domain.User;
+import it.unibz.digidojo.entitymanagerservice.user.domain.UserRepository;
+
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class SearchUser {
     private final UserRepository userRepository;
-
-    @Autowired
-    public SearchUser(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     /**
      * @param emailAddress the email address of the user we want to find
@@ -41,5 +42,4 @@ public class SearchUser {
         }
         return maybeUser.get();
     }
-
 }

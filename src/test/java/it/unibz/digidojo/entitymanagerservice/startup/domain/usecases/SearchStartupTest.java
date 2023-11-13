@@ -1,4 +1,14 @@
-package it.unibz.digidojo.entitymanagerservice.startup.domain;
+package it.unibz.digidojo.entitymanagerservice.startup.domain.usecases;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -6,37 +16,30 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.when;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import it.unibz.digidojo.entitymanagerservice.startup.domain.Startup;
+import it.unibz.digidojo.entitymanagerservice.startup.domain.StartupRepository;
+import it.unibz.digidojo.entitymanagerservice.util.NumberGenerator;
 
 @ExtendWith(MockitoExtension.class)
 public class SearchStartupTest {
-    private SearchStartup underTest;
-
     @Mock
     private StartupRepository startupRepository;
+    private SearchStartup useCase;
 
     @BeforeEach
     void setUp() {
-        underTest = new SearchStartup(startupRepository);
+        useCase = new SearchStartup(startupRepository);
     }
 
     @Test
     public void findByIdReturnsStartupWithMatchingId() {
-        Long id = randomPositiveLong();
+        Long id = NumberGenerator.randomPositiveLong();
         String name = "name";
         String description = "description";
         when(startupRepository.findById(anyLong()))
                 .thenReturn(Optional.of(new Startup(id, name, description)));
 
-        Startup result = underTest.findById(id);
-
+        Startup result = useCase.findById(id);
         assertThat(result)
                 .isInstanceOf(Startup.class);
         assertThat(result.getId())
@@ -51,8 +54,8 @@ public class SearchStartupTest {
     public void findByIdThrowsForNotExistingStartup() {
         when(startupRepository.findById(anyLong()))
                 .thenReturn(Optional.empty());
-        Long id = randomPositiveLong();
-        assertThatThrownBy(() -> underTest.findById(id))
+        Long id = NumberGenerator.randomPositiveLong();
+        assertThatThrownBy(() -> useCase.findById(id))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Startup with id " + id + " is not present in the database");
     }
@@ -69,7 +72,7 @@ public class SearchStartupTest {
                     add(startup1);
                     add(startup2);
                 }});
-        List<Startup> result = underTest.findAll();
+        List<Startup> result = useCase.findAll();
         assertThat(result).isInstanceOf(List.class);
         assertThat(result.size()).isEqualTo(startups.size());
         assertThat(result.get(0)).isInstanceOf(Startup.class);
@@ -80,21 +83,20 @@ public class SearchStartupTest {
     public void findAllThrowsForNoExistingStartups() {
         when(startupRepository.findAll())
                 .thenReturn(new ArrayList<>());
-        assertThatThrownBy(() -> underTest.findAll())
+        assertThatThrownBy(() -> useCase.findAll())
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("No startups in database");
     }
 
     @Test
     public void findByNameReturnsStartupWithMatchingName() {
-        Long id = randomPositiveLong();
+        Long id = NumberGenerator.randomPositiveLong();
         String name = "name";
         String description = "description";
         when(startupRepository.findByName(name))
                 .thenReturn(Optional.of(new Startup(id, name, description)));
 
-        Startup result = underTest.findByName(name);
-
+        Startup result = useCase.findByName(name);
         assertThat(result)
                 .isInstanceOf(Startup.class);
         assertThat(result.getId())
@@ -110,14 +112,8 @@ public class SearchStartupTest {
         when(startupRepository.findByName(anyString()))
                 .thenReturn(Optional.empty());
         String name = "name";
-        assertThatThrownBy(() -> underTest.findByName(name))
+        assertThatThrownBy(() -> useCase.findByName(name))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Startup with name " + name + " does not exist");
-    }
-
-    private Long randomPositiveLong() {
-        long leftLimit = 1L;
-        long rightLimit = 1000L;
-        return leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
     }
 }

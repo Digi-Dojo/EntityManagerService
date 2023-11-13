@@ -1,4 +1,4 @@
-package it.unibz.digidojo.entitymanagerservice.teammember.domain;
+package it.unibz.digidojo.entitymanagerservice.teammember.domain.usecases;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -6,33 +6,27 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.unibz.digidojo.entitymanagerservice.startup.domain.SearchStartup;
 import it.unibz.digidojo.entitymanagerservice.startup.domain.Startup;
-import it.unibz.digidojo.entitymanagerservice.startup.domain.StartupRepository;
-import it.unibz.digidojo.entitymanagerservice.user.domain.SearchUser;
+import it.unibz.digidojo.entitymanagerservice.startup.domain.usecases.SearchStartup;
+import it.unibz.digidojo.entitymanagerservice.teammember.domain.TeamMember;
+import it.unibz.digidojo.entitymanagerservice.teammember.domain.TeamMemberBroadcaster;
+import it.unibz.digidojo.entitymanagerservice.teammember.domain.TeamMemberRepository;
 import it.unibz.digidojo.entitymanagerservice.user.domain.User;
-import it.unibz.digidojo.entitymanagerservice.user.domain.UserRepository;
+import it.unibz.digidojo.entitymanagerservice.user.domain.usecases.SearchUser;
 
 
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ManageTeamMember {
     private final TeamMemberRepository teamMemberRepository;
     private final SearchUser searchUsers;
     private final SearchStartup searchStartups;
     private final TeamMemberBroadcaster teamMemberBroadcaster;
-
-
-    @Autowired
-    public ManageTeamMember(TeamMemberRepository teamMemberRepository, UserRepository userRepository,
-                            StartupRepository startupRepository, TeamMemberBroadcaster teamMemberBroadcaster) {
-        this.teamMemberRepository = teamMemberRepository;
-        searchUsers = new SearchUser(userRepository);
-        searchStartups = new SearchStartup(startupRepository);
-        this.teamMemberBroadcaster = teamMemberBroadcaster;
-    }
 
     /**
      * @param id id of the team member we want to find
@@ -89,7 +83,6 @@ public class ManageTeamMember {
         if (maybeTeamMembers.isEmpty()) {
             throw new IllegalArgumentException("No Team Members belonging to startup with Id " + startupId);
         }
-
         return maybeTeamMembers.get();
     }
 
@@ -127,7 +120,6 @@ public class ManageTeamMember {
         if (maybeTeamMember.isEmpty()) {
             throw new IllegalArgumentException("No User with Id " + userId + " belonging to startup with Id " + startupId);
         }
-
         return maybeTeamMember.get();
     }
 
@@ -150,9 +142,7 @@ public class ManageTeamMember {
         }
 
         TeamMember teamMember = teamMemberRepository.save(new TeamMember(user, startup, role));
-
         teamMemberBroadcaster.emitTeamMemberCreated(teamMember);
-
         return teamMember;
     }
 
@@ -166,9 +156,7 @@ public class ManageTeamMember {
         if (maybeTeamMember.isEmpty()) {
             throw new IllegalArgumentException("No TeamMember with id #" + id + " present yet");
         }
-
         teamMemberRepository.delete(maybeTeamMember.get());
-
         teamMemberBroadcaster.emitTeamMemberDeleted(maybeTeamMember.get());
     }
 
@@ -184,11 +172,8 @@ public class ManageTeamMember {
         if (maybeTeamMember.isEmpty()) {
             throw new IllegalArgumentException("No User with id TeamMember #" + id + " present in any Team yet");
         }
-
         TeamMember teamMember = maybeTeamMember.get();
         teamMember.setRole(newRole);
         return teamMemberRepository.save(teamMember);
     }
-
-
 }
