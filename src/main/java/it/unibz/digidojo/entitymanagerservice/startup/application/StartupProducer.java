@@ -1,17 +1,16 @@
 package it.unibz.digidojo.entitymanagerservice.startup.application;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.stereotype.Component;
-
 import it.unibz.digidojo.entitymanagerservice.common.kafka.BaseProducer;
-import it.unibz.digidojo.entitymanagerservice.startup.domain.Startup;
 import it.unibz.digidojo.entitymanagerservice.startup.domain.StartupBroadcaster;
+import it.unibz.digidojo.entitymanagerservice.startup.domain.model.Startup;
 import it.unibz.digidojo.entitymanagerservice.util.CRUD;
 import it.unibz.digidojo.sharedmodel.dto.StartupDTO;
 import it.unibz.digidojo.sharedmodel.event.startup.StartupCreatedEvent;
 import it.unibz.digidojo.sharedmodel.event.startup.StartupDeletedEvent;
 import it.unibz.digidojo.sharedmodel.event.startup.StartupUpdatedEvent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Component;
 
 @Component
 public class StartupProducer extends BaseProducer implements StartupBroadcaster {

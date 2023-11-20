@@ -4,12 +4,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.Optional;
-
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import it.unibz.digidojo.entitymanagerservice.user.domain.User;
+import it.unibz.digidojo.entitymanagerservice.user.domain.model.User;
 import it.unibz.digidojo.sharedmodel.marshaller.Marshaller;
 import it.unibz.digidojo.sharedmodel.request.UpdateUserRequest;
 import it.unibz.digidojo.sharedmodel.request.UserRequest;

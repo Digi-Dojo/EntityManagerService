@@ -1,24 +1,20 @@
 package it.unibz.digidojo.entitymanagerservice.teammember.domain.usecases;
 
+import it.unibz.digidojo.entitymanagerservice.startup.domain.model.Startup;
+import it.unibz.digidojo.entitymanagerservice.startup.domain.usecases.SearchStartup;
+import it.unibz.digidojo.entitymanagerservice.teammember.domain.TeamMemberBroadcaster;
+import it.unibz.digidojo.entitymanagerservice.teammember.domain.TeamMemberRepository;
+import it.unibz.digidojo.entitymanagerservice.teammember.domain.model.TeamMember;
+import it.unibz.digidojo.entitymanagerservice.user.domain.model.User;
+import it.unibz.digidojo.entitymanagerservice.user.domain.usecases.SearchUser;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import it.unibz.digidojo.entitymanagerservice.startup.domain.Startup;
-import it.unibz.digidojo.entitymanagerservice.startup.domain.usecases.SearchStartup;
-import it.unibz.digidojo.entitymanagerservice.teammember.domain.TeamMember;
-import it.unibz.digidojo.entitymanagerservice.teammember.domain.TeamMemberBroadcaster;
-import it.unibz.digidojo.entitymanagerservice.teammember.domain.TeamMemberRepository;
-import it.unibz.digidojo.entitymanagerservice.user.domain.User;
-import it.unibz.digidojo.entitymanagerservice.user.domain.usecases.SearchUser;
-
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))

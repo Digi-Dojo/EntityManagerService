@@ -1,18 +1,17 @@
 package it.unibz.digidojo.entitymanagerservice.teammember.application;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.stereotype.Component;
-
 import it.unibz.digidojo.entitymanagerservice.common.kafka.BaseProducer;
-import it.unibz.digidojo.entitymanagerservice.teammember.domain.TeamMember;
 import it.unibz.digidojo.entitymanagerservice.teammember.domain.TeamMemberBroadcaster;
+import it.unibz.digidojo.entitymanagerservice.teammember.domain.model.TeamMember;
 import it.unibz.digidojo.entitymanagerservice.util.CRUD;
 import it.unibz.digidojo.sharedmodel.dto.StartupDTO;
 import it.unibz.digidojo.sharedmodel.dto.TeamMemberDTO;
 import it.unibz.digidojo.sharedmodel.dto.UserDTO;
 import it.unibz.digidojo.sharedmodel.event.teammember.StartupTeamMemberCreatedEvent;
 import it.unibz.digidojo.sharedmodel.event.teammember.StartupTeamMemberDeletedEvent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Component;
 
 @Component
 public class TeamMemberProducer extends BaseProducer implements TeamMemberBroadcaster {

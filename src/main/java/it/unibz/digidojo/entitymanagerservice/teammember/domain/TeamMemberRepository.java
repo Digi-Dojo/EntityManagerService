@@ -1,8 +1,8 @@
 package it.unibz.digidojo.entitymanagerservice.teammember.domain;
 
+import it.unibz.digidojo.entitymanagerservice.teammember.domain.model.TeamMember;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

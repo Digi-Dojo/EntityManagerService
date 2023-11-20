@@ -16,7 +16,7 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.web.servlet.MockMvc;
 
 import it.unibz.digidojo.entitymanagerservice.integration.scenarios.StartupTestScenarios;
-import it.unibz.digidojo.entitymanagerservice.startup.domain.Startup;
+import it.unibz.digidojo.entitymanagerservice.startup.domain.model.Startup;
 import it.unibz.digidojo.sharedmodel.marshaller.Marshaller;
 import it.unibz.digidojo.sharedmodel.request.StartupRequest;
 import it.unibz.digidojo.sharedmodel.request.StartupRequestBuilder;
@@ -53,7 +53,7 @@ public class StartupControllerIntegrationTest {
 
     @Test
     public void shouldGetTheStartupWithTheNewSpecifiedNameWhenItIsUpdated() throws Exception {
-        Startup startup = when.aStartupIsSuccessfullyCreated(new StartupRequest("DigiDojo", "a fun way to create startups"));
+        Startup startup = given.aStartupIsSuccessfullyCreated(new StartupRequest("DigiDojo", "a fun way to create startups"));
         when.aStartupIsSuccessfullyUpdated(startup.getId(), StartupRequestBuilder.builder().name("NewDigiDojo").build());
         startup = then.aStartupIsIsSuccessfullyFetchedByName("NewDigiDojo");
         assertEquals("NewDigiDojo", startup.getName());
@@ -61,7 +61,7 @@ public class StartupControllerIntegrationTest {
 
     @Test
     public void shouldGetTheStartupWithTheSpecifiedNameWhenItsDescriptionIsUpdated() throws Exception {
-        Startup startup = when.aStartupIsSuccessfullyCreated(new StartupRequest("DigiDojo", "a fun way to create startups"));
+        Startup startup = given.aStartupIsSuccessfullyCreated(new StartupRequest("DigiDojo", "a fun way to create startups"));
         when.aStartupIsSuccessfullyUpdated(
                 startup.getId(),
                 StartupRequestBuilder.builder().description("a smart way to create startups").build()

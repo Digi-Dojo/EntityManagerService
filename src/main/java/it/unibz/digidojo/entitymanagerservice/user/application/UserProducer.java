@@ -1,17 +1,16 @@
 package it.unibz.digidojo.entitymanagerservice.user.application;
 
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.stereotype.Component;
-
 import it.unibz.digidojo.entitymanagerservice.common.kafka.BaseProducer;
-import it.unibz.digidojo.entitymanagerservice.user.domain.User;
 import it.unibz.digidojo.entitymanagerservice.user.domain.UserBroadcaster;
+import it.unibz.digidojo.entitymanagerservice.user.domain.model.User;
 import it.unibz.digidojo.entitymanagerservice.util.CRUD;
 import it.unibz.digidojo.sharedmodel.dto.UserDTO;
 import it.unibz.digidojo.sharedmodel.event.user.UserCreatedEvent;
 import it.unibz.digidojo.sharedmodel.event.user.UserDeletedEvent;
 import it.unibz.digidojo.sharedmodel.event.user.UserLoggedInEvent;
 import it.unibz.digidojo.sharedmodel.event.user.UserUpdatedEvent;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Component;
 
 @Component
 public class UserProducer extends BaseProducer implements UserBroadcaster {

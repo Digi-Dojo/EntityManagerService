@@ -1,5 +1,10 @@
 package it.unibz.digidojo.entitymanagerservice.common.kafka;
 
+import it.unibz.digidojo.entitymanagerservice.util.CRUD;
+import it.unibz.digidojo.sharedmodel.event.BaseEvent;
+import it.unibz.digidojo.sharedmodel.marshaller.Marshaller;
+
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 
 import lombok.RequiredArgsConstructor;
@@ -8,10 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.header.internals.RecordHeader;
 import org.springframework.kafka.core.KafkaTemplate;
-
-import it.unibz.digidojo.entitymanagerservice.util.CRUD;
-import it.unibz.digidojo.sharedmodel.event.BaseEvent;
-import it.unibz.digidojo.sharedmodel.marshaller.Marshaller;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -35,7 +36,8 @@ public abstract class BaseProducer {
                     null,
                     null, // TODO: Investigate the need to set a key on update events
                     marshaller.marshal(event),
-                    Collections.singletonList(new RecordHeader(KafkaConfig.EVENT_TYPE_KEY, event.getEventType().getBytes()))
+                    Collections.singletonList(
+                            new RecordHeader(KafkaConfig.EVENT_TYPE_KEY, event.getEventType().getBytes(StandardCharsets.UTF_8)))
             );
 
             sender.send(kafkaRecord);

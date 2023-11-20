@@ -1,5 +1,11 @@
 package it.unibz.digidojo.entitymanagerservice.user.application;
 
+import it.unibz.digidojo.entitymanagerservice.user.domain.model.User;
+import it.unibz.digidojo.entitymanagerservice.user.domain.usecases.LoginUser;
+import it.unibz.digidojo.entitymanagerservice.user.domain.usecases.ManageUser;
+import it.unibz.digidojo.entitymanagerservice.user.domain.usecases.SearchUser;
+import it.unibz.digidojo.sharedmodel.request.UpdateUserRequest;
+import it.unibz.digidojo.sharedmodel.request.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,13 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import it.unibz.digidojo.entitymanagerservice.user.domain.usecases.LoginUser;
-import it.unibz.digidojo.entitymanagerservice.user.domain.usecases.ManageUser;
-import it.unibz.digidojo.entitymanagerservice.user.domain.usecases.SearchUser;
-import it.unibz.digidojo.entitymanagerservice.user.domain.User;
-import it.unibz.digidojo.sharedmodel.request.UpdateUserRequest;
-import it.unibz.digidojo.sharedmodel.request.UserRequest;
 
 @RestController
 @RequestMapping(path = "/v1/user")
@@ -59,7 +58,9 @@ public class UserController {
 
     @PatchMapping("/{id}")
     public User updateUser(@PathVariable("id") Long id, @Validated @RequestBody UpdateUserRequest request) {
-        User user = searchUser.findById(id), updatedUser = null;
+        User user = searchUser.findById(id);
+        User updatedUser = null;
+
         user = loginUser.verifyPassword(user, request.currentPassword());
 
         if (request.emailAddress() != null) {

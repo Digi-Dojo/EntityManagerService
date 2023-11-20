@@ -14,7 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import it.unibz.digidojo.entitymanagerservice.user.domain.User;
+import it.unibz.digidojo.entitymanagerservice.user.domain.model.User;
 import it.unibz.digidojo.entitymanagerservice.user.domain.UserBroadcaster;
 import it.unibz.digidojo.entitymanagerservice.user.domain.UserRepository;
 import it.unibz.digidojo.entitymanagerservice.util.NumberGenerator;
@@ -61,7 +61,7 @@ public class ManageUserTest {
     }
 
     @Test
-    public void UpdatePassword() {
+    public void updatePassword() {
         String userName = "testUser";
         String userMail = "TestUser@testmail.com";
         String userOldPassword = "testPassword";
@@ -75,7 +75,7 @@ public class ManageUserTest {
     }
 
     @Test
-    public void UpdateThrowsExceptionForNonExistingUser() {
+    public void updateThrowsExceptionForNonExistingUser() {
         String userName = "testUser";
         String userMail = "TestUser@testmail.com";
         String userOldPassword = "testPassword";
@@ -98,7 +98,7 @@ public class ManageUserTest {
     }
 
     @Test
-    public void UpdatesMailAddressThrowsExceptionForAlreadyExistingNewMailAddress() {
+    public void updatesMailAddressThrowsExceptionForAlreadyExistingNewMailAddress() {
         User user = new User("testUser", "testUser@testmail.com", "testPassword");
         when(userRepository.findByEmailAddress(anyString())).thenReturn(
                 Optional.of(new User("testUser", "testUser@testmail.com", "testPassword")));
@@ -109,7 +109,7 @@ public class ManageUserTest {
     }
 
     @Test
-    public void UpdatesMailAddressThrowsExceptionForNonExistingOldMailAddress() {
+    public void updatesMailAddressThrowsExceptionForNonExistingOldMailAddress() {
         User user = new User("testUser", "testUser@testmail.com", "testPassword");
         when(userRepository.findByEmailAddress(anyString())).thenReturn(Optional.empty());
 

@@ -1,5 +1,8 @@
 package it.unibz.digidojo.entitymanagerservice.common.kafka;
 
+import it.unibz.digidojo.sharedmodel.marshaller.Marshaller;
+
+import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.StreamSupport;
@@ -9,8 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.kafka.listener.adapter.RecordFilterStrategy;
-
-import it.unibz.digidojo.sharedmodel.marshaller.Marshaller;
 
 @RequiredArgsConstructor
 public abstract class BaseConsumer {
@@ -26,7 +27,7 @@ public abstract class BaseConsumer {
                                             consumerRecord.headers().headers(KafkaConfig.EVENT_TYPE_KEY).spliterator(),
                                             false
                                     )
-                                    .noneMatch(header -> hasDesiredEventType(pattern, new String(header.value())));
+                                    .noneMatch(header -> hasDesiredEventType(pattern, new String(header.value(), StandardCharsets.UTF_8)));
             }
         };
     }

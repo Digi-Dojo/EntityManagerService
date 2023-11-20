@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.unibz.digidojo.entitymanagerservice.startup.domain.model.Startup;
 import it.unibz.digidojo.entitymanagerservice.startup.domain.usecases.ManageStartup;
 import it.unibz.digidojo.entitymanagerservice.startup.domain.usecases.SearchStartup;
-import it.unibz.digidojo.entitymanagerservice.startup.domain.Startup;
 import it.unibz.digidojo.sharedmodel.request.StartupRequest;
 
 @RestController
@@ -52,7 +52,8 @@ public class StartupController {
 
     @PatchMapping("/{id}")
     public Startup updateStartup(@PathVariable("id") Long id, @RequestBody StartupRequest request) {
-        Startup startup = searchStartups.findById(id), updatedStartup = null;
+        Startup startup = searchStartups.findById(id);
+        Startup updatedStartup = null;
 
         if (request.name() != null) {
             updatedStartup = manageStartup.updateStartupName(startup.getName(), request.name());

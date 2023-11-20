@@ -16,7 +16,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import it.unibz.digidojo.entitymanagerservice.user.domain.User;
+import it.unibz.digidojo.entitymanagerservice.user.domain.model.User;
 import it.unibz.digidojo.entitymanagerservice.user.domain.UserBroadcaster;
 
 @ExtendWith(MockitoExtension.class)

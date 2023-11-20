@@ -24,12 +24,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
-import it.unibz.digidojo.entitymanagerservice.startup.domain.Startup;
+import it.unibz.digidojo.entitymanagerservice.startup.domain.model.Startup;
 import it.unibz.digidojo.entitymanagerservice.startup.domain.usecases.SearchStartup;
-import it.unibz.digidojo.entitymanagerservice.teammember.domain.TeamMember;
+import it.unibz.digidojo.entitymanagerservice.teammember.domain.model.TeamMember;
 import it.unibz.digidojo.entitymanagerservice.teammember.domain.TeamMemberBroadcaster;
 import it.unibz.digidojo.entitymanagerservice.teammember.domain.TeamMemberRepository;
-import it.unibz.digidojo.entitymanagerservice.user.domain.User;
+import it.unibz.digidojo.entitymanagerservice.user.domain.model.User;
 import it.unibz.digidojo.entitymanagerservice.user.domain.usecases.SearchUser;
 import it.unibz.digidojo.entitymanagerservice.util.NumberGenerator;
 

@@ -1,17 +1,15 @@
-package it.unibz.digidojo.entitymanagerservice.teammember.domain;
+package it.unibz.digidojo.entitymanagerservice.teammember.domain.model;
 
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import it.unibz.digidojo.entitymanagerservice.startup.domain.Startup;
-import it.unibz.digidojo.entitymanagerservice.user.domain.User;
+import it.unibz.digidojo.entitymanagerservice.startup.domain.model.Startup;
+import it.unibz.digidojo.entitymanagerservice.user.domain.model.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
