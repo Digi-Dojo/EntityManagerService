@@ -16,7 +16,7 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.web.servlet.MockMvc;
 
 import it.unibz.digidojo.entitymanagerservice.integration.scenarios.StartupTestScenarios;
-import it.unibz.digidojo.entitymanagerservice.startup.domain.Startup;
+import it.unibz.digidojo.entitymanagerservice.startup.domain.model.Startup;
 import it.unibz.digidojo.sharedmodel.marshaller.Marshaller;
 import it.unibz.digidojo.sharedmodel.request.StartupRequest;
 import it.unibz.digidojo.sharedmodel.request.StartupRequestBuilder;

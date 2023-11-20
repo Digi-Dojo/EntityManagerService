@@ -13,7 +13,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
 import it.unibz.digidojo.entitymanagerservice.integration.scenarios.UserTestScenarios;
-import it.unibz.digidojo.entitymanagerservice.user.domain.User;
+import it.unibz.digidojo.entitymanagerservice.user.domain.model.User;
 import it.unibz.digidojo.sharedmodel.marshaller.Marshaller;
 import it.unibz.digidojo.sharedmodel.request.UpdateUserRequestBuilder;
 import it.unibz.digidojo.sharedmodel.request.UserRequest;

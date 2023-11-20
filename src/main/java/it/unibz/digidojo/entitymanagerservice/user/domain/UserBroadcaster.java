@@ -1,5 +1,7 @@
 package it.unibz.digidojo.entitymanagerservice.user.domain;
 
+import it.unibz.digidojo.entitymanagerservice.user.domain.model.User;
+
 public interface UserBroadcaster {
     void emitUserCreated(User user);
 

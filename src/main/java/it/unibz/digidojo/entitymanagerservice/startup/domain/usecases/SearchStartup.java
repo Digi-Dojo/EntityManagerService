@@ -1,15 +1,12 @@
 package it.unibz.digidojo.entitymanagerservice.startup.domain.usecases;
 
+import it.unibz.digidojo.entitymanagerservice.startup.domain.StartupRepository;
+import it.unibz.digidojo.entitymanagerservice.startup.domain.model.Startup;
 import java.util.List;
 import java.util.Optional;
-
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import it.unibz.digidojo.entitymanagerservice.startup.domain.Startup;
-import it.unibz.digidojo.entitymanagerservice.startup.domain.StartupRepository;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))

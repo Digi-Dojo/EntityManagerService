@@ -1,17 +1,14 @@
 package it.unibz.digidojo.entitymanagerservice.common.kafka;
 
-import java.util.Collections;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
-import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.common.header.internals.RecordHeader;
-import org.springframework.kafka.core.KafkaTemplate;
-
 import it.unibz.digidojo.entitymanagerservice.util.CRUD;
 import it.unibz.digidojo.sharedmodel.event.BaseEvent;
 import it.unibz.digidojo.sharedmodel.marshaller.Marshaller;
+import java.util.Collections;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.header.internals.RecordHeader;
+import org.springframework.kafka.core.KafkaTemplate;
 
 @Slf4j
 @RequiredArgsConstructor

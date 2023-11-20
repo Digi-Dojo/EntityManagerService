@@ -12,9 +12,9 @@ import java.util.Map;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import it.unibz.digidojo.entitymanagerservice.startup.domain.Startup;
-import it.unibz.digidojo.entitymanagerservice.teammember.domain.TeamMember;
-import it.unibz.digidojo.entitymanagerservice.user.domain.User;
+import it.unibz.digidojo.entitymanagerservice.startup.domain.model.Startup;
+import it.unibz.digidojo.entitymanagerservice.teammember.domain.model.TeamMember;
+import it.unibz.digidojo.entitymanagerservice.user.domain.model.User;
 import it.unibz.digidojo.sharedmodel.marshaller.Marshaller;
 import it.unibz.digidojo.sharedmodel.request.StartupRequest;
 import it.unibz.digidojo.sharedmodel.request.TeamMemberRequest;

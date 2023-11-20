@@ -1,15 +1,12 @@
 package it.unibz.digidojo.entitymanagerservice.startup.domain.usecases;
 
-import java.util.Optional;
-
-import lombok.RequiredArgsConstructor;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import it.unibz.digidojo.entitymanagerservice.startup.domain.Startup;
 import it.unibz.digidojo.entitymanagerservice.startup.domain.StartupBroadcaster;
 import it.unibz.digidojo.entitymanagerservice.startup.domain.StartupRepository;
+import it.unibz.digidojo.entitymanagerservice.startup.domain.model.Startup;
+import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -18,7 +15,7 @@ public class ManageStartup {
     private final StartupBroadcaster startupBroadcaster;
 
     /**
-     * Given a name and a description, this method creates a startup with said characteristics
+     * Given a name and a description, this method creates a startup with said characteristics.
      *
      * @param name        the name of the startup
      * @param description the description of the startup
@@ -39,7 +36,7 @@ public class ManageStartup {
     }
 
     /**
-     * Given the current name of a startup and a new name, this method replaces the old name with the new one
+     * Given the current name of a startup and a new name, this method replaces the old name with the new one.
      *
      * @param oldName current name of the startup whose name we want to change
      * @param newName the name that should replace the current one
@@ -64,7 +61,7 @@ public class ManageStartup {
     }
 
     /**
-     * Given the name of a startup, this method replaces its current description with the one provided
+     * Given the name of a startup, this method replaces its current description with the one provided.
      *
      * @param name        name of the startup
      * @param description new description that will substitute the old
@@ -85,7 +82,7 @@ public class ManageStartup {
     }
 
     /**
-     * <p>Given the name of a startup, this methods deletes the instance of said startup from the database</p>
+     * Given the name of a startup, this methods deletes the instance of said startup from the database.
      *
      * @param name name of the startup to be deleted
      * @throws IllegalArgumentException if no startup with such name is found

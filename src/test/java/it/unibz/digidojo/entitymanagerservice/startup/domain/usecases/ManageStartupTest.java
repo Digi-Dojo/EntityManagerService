@@ -14,7 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import it.unibz.digidojo.entitymanagerservice.startup.domain.Startup;
+import it.unibz.digidojo.entitymanagerservice.startup.domain.model.Startup;
 import it.unibz.digidojo.entitymanagerservice.startup.domain.StartupBroadcaster;
 import it.unibz.digidojo.entitymanagerservice.startup.domain.StartupRepository;
 import it.unibz.digidojo.entitymanagerservice.util.NumberGenerator;

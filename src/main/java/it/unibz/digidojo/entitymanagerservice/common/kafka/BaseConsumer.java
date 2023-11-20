@@ -1,16 +1,13 @@
 package it.unibz.digidojo.entitymanagerservice.common.kafka;
 
+import it.unibz.digidojo.sharedmodel.marshaller.Marshaller;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.StreamSupport;
-
 import lombok.RequiredArgsConstructor;
-
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.kafka.listener.adapter.RecordFilterStrategy;
-
-import it.unibz.digidojo.sharedmodel.marshaller.Marshaller;
 
 @RequiredArgsConstructor
 public abstract class BaseConsumer {

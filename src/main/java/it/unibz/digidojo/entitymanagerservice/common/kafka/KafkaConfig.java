@@ -1,10 +1,8 @@
 package it.unibz.digidojo.entitymanagerservice.common.kafka;
 
-import java.util.Map;
-
-import org.springframework.context.annotation.Configuration;
-
 import it.unibz.digidojo.entitymanagerservice.util.CRUD;
+import java.util.Map;
+import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class KafkaConfig {

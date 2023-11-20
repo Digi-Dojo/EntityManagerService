@@ -1,15 +1,12 @@
 package it.unibz.digidojo.entitymanagerservice.user.domain.usecases;
 
-import java.util.Optional;
-
-import lombok.RequiredArgsConstructor;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import it.unibz.digidojo.entitymanagerservice.user.domain.User;
 import it.unibz.digidojo.entitymanagerservice.user.domain.UserBroadcaster;
 import it.unibz.digidojo.entitymanagerservice.user.domain.UserRepository;
+import it.unibz.digidojo.entitymanagerservice.user.domain.model.User;
+import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 //TODO: Implement name update
 @Service
