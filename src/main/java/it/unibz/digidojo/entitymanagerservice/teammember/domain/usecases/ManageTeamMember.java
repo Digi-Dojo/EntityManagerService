@@ -7,11 +7,7 @@ import it.unibz.digidojo.entitymanagerservice.teammember.domain.TeamMemberReposi
 import it.unibz.digidojo.entitymanagerservice.teammember.domain.model.TeamMember;
 import it.unibz.digidojo.entitymanagerservice.user.domain.model.User;
 import it.unibz.digidojo.entitymanagerservice.user.domain.usecases.SearchUser;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,101 +19,6 @@ public class ManageTeamMember {
     private final SearchUser searchUsers;
     private final SearchStartup searchStartups;
     private final TeamMemberBroadcaster teamMemberBroadcaster;
-
-    /**
-     * @param id id of the team member we want to find
-     * @return the team member with the provided id
-     * @throws IllegalArgumentException if no team member with the provided id is found
-     */
-    public TeamMember findByTeamMemberId(Long id) {
-        Optional<TeamMember> maybeTeamMember = teamMemberRepository.findById(id);
-
-        if (maybeTeamMember.isEmpty()) {
-            throw new IllegalArgumentException("Team Member with the id #" + id + " not found");
-        }
-        return maybeTeamMember.get();
-    }
-
-    /**
-     * @param id id of the user
-     * @return a list containing all the instances in the different startups of team member the user with the provided id belongs to
-     * @throws IllegalArgumentException if no team member with the provided user id is found
-     */
-    public List<TeamMember> findAllByUserId(Long id) {
-        searchUsers.findById(id);
-        Optional<List<TeamMember>> maybeTeamMember = teamMemberRepository.findAllByUserId(id);
-
-        if (maybeTeamMember.isEmpty()) {
-            throw new IllegalArgumentException("Team Members with user id #" + id + " not found");
-        }
-        return maybeTeamMember.get();
-    }
-
-    /**
-     * @param role role covered by the team members we want to find
-     * @return a list containing all the team members that cover the provided role
-     * @throws IllegalArgumentException if no team member with the provided role is found
-     */
-    public List<TeamMember> findByRole(String role) {
-        Optional<List<TeamMember>> maybeExistRole = teamMemberRepository.findAllByRole(role);
-
-        if (maybeExistRole.isEmpty()) {
-            throw new IllegalArgumentException("Team Member with role #" + role + " not found");
-        }
-        return maybeExistRole.get();
-    }
-
-    /**
-     * @param startupId the id of the startup, of which we want to find all team members
-     * @return a list containing all the team members in the startup with the provided startupId
-     * @throws IllegalArgumentException if no team member belonging to the startup is found
-     */
-    public List<TeamMember> findTeamMembersByStartupId(Long startupId) {
-        searchStartups.findById(startupId);
-        Optional<List<TeamMember>> maybeTeamMembers = teamMemberRepository.findTeamMembersByStartupId(startupId);
-
-        if (maybeTeamMembers.isEmpty()) {
-            throw new IllegalArgumentException("No Team Members belonging to startup with Id " + startupId);
-        }
-        return maybeTeamMembers.get();
-    }
-
-    /**
-     * @param startupId the id of the startup, of which we want to find all affiliated users
-     * @return a list containing all the users that are team members in the startup with the provided startupId
-     * @throws IllegalArgumentException if no team member belonging to the startup is found
-     */
-    public List<User> findUsersByStartupId(Long startupId) {
-        List<TeamMember> teamMembers = findTeamMembersByStartupId(startupId);
-        List<User> users = new ArrayList<>();
-        Set<Long> userIds = new HashSet<>();
-        for (TeamMember t : teamMembers) {
-            userIds.add(t.getUser().getId());
-        }
-        for (Long id : userIds) {
-            users.add(searchUsers.findById(id));
-        }
-        return users;
-    }
-
-    /**
-     * @param userId    the id of the user, who is a team member in the startup
-     * @param startupId the id of the startup
-     * @return the team member who is the user with id userId in the startup with startupId
-     * @throws IllegalArgumentException if no user with the provided userId is found, or if no startup with the provided
-     *                                  startupId is found, or if no team member with the provided userId and startupId is found
-     */
-    public TeamMember findByUserIdAndStartupId(Long userId, Long startupId) {
-        searchStartups.findById(startupId);
-        searchUsers.findById(userId);
-
-        Optional<TeamMember> maybeTeamMember = teamMemberRepository.findByUserIdAndStartupId(userId, startupId);
-
-        if (maybeTeamMember.isEmpty()) {
-            throw new IllegalArgumentException("No User with Id " + userId + " belonging to startup with Id " + startupId);
-        }
-        return maybeTeamMember.get();
-    }
 
     /**
      * @param userId    id of the user that wants to become a team member in a startup
